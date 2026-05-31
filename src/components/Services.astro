@@ -1,0 +1,64 @@
+---
+import { site } from "../data/site";
+
+const { services_primary, services_secondary } = site.business;
+
+const iconMap: Record<string, string> = {
+  droplet: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+  wrench: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  shower: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 12l8-8 8 8"/><path d="M4 12v8"/><path d="M20 12v8"/><path d="M4 20h16"/><circle cx="9" cy="17" r="0.5" fill="currentColor"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/><circle cx="15" cy="17" r="0.5" fill="currentColor"/><circle cx="9" cy="20" r="0.5" fill="currentColor"/><circle cx="12" cy="20" r="0.5" fill="currentColor"/><circle cx="15" cy="20" r="0.5" fill="currentColor"/></svg>`,
+};
+---
+
+<section class="bg-white py-16" id="diensten">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="text-3xl font-bold text-gray-900 mb-10">Diensten</h2>
+    <div class="grid md:grid-cols-2 gap-10">
+      <!-- Loodgieterswerk -->
+      <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="inline-block w-1 h-7 bg-[#1a4d7a] rounded-full"></span>
+          <h3 class="text-xl font-bold text-[#1a4d7a]">Loodgieterswerk</h3>
+        </div>
+        <ul class="space-y-4">
+          {
+            services_primary.map((svc) => (
+              <li class="flex items-start gap-4">
+                <span class="mt-0.5 text-[#d97706] flex-shrink-0" set:html={iconMap[svc.icon] ?? ""} />
+                <span class="text-gray-800 font-medium">{svc.title}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Allround klussen -->
+      <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="inline-block w-1 h-7 bg-[#d97706] rounded-full"></span>
+          <h3 class="text-xl font-bold text-gray-800">Allround klussen</h3>
+        </div>
+        <ul class="space-y-3">
+          {
+            services_secondary.map((svc) => (
+              <li class="flex items-center gap-3 text-gray-700">
+                <svg
+                  class="w-4 h-4 text-[#d97706] flex-shrink-0"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                {svc.title}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

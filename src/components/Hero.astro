@@ -1,0 +1,75 @@
+---
+import { site } from "../data/site";
+
+const { owner, business, contact } = site;
+const hasPhoto = true; // set to false until real image is uploaded
+---
+
+<section class="bg-[#1a4d7a] text-white">
+  <div
+    class="mx-auto max-w-6xl px-6 py-16 flex flex-col-reverse gap-10 md:flex-row md:items-center md:gap-16"
+  >
+    <!-- Text -->
+    <div class="flex-1">
+      <p class="text-[#d97706] font-semibold tracking-wide uppercase text-sm mb-3">
+        {owner.city} &amp; omgeving
+      </p>
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+        {owner.name}
+      </h1>
+      <p class="text-xl md:text-2xl font-medium text-blue-200 mb-4">
+        {business.tagline_nl}
+      </p>
+      <p class="text-blue-100 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+        {business.intro_nl}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        {
+          contact.booking_url !== "TBD" ? (
+            <a
+              href={contact.booking_url}
+              class="inline-block bg-[#d97706] hover:bg-[#b45309] text-white font-semibold px-7 py-3 rounded-lg text-center transition-colors"
+            >
+              Plan een afspraak
+            </a>
+          ) : (
+            <span
+              class="inline-block bg-[#d97706] opacity-60 cursor-not-allowed text-white font-semibold px-7 py-3 rounded-lg text-center"
+              title="Binnenkort beschikbaar"
+            >
+              Plan een afspraak
+            </span>
+          )
+        }
+        <a
+          href={`tel:${contact.phone_tel}`}
+          class="inline-block border-2 border-white hover:bg-white hover:text-[#1a4d7a] text-white font-semibold px-7 py-3 rounded-lg text-center transition-colors"
+        >
+          Bel direct: {contact.phone_display}
+        </a>
+      </div>
+    </div>
+
+    <!-- Photo -->
+    <div class="flex-shrink-0 flex justify-center md:justify-end">
+      {
+        hasPhoto ? (
+          <img
+            src={contact.photo}
+            alt={`${owner.name} — loodgieter in ${owner.city}`}
+            width="280"
+            height="320"
+            class="rounded-2xl object-cover shadow-2xl w-56 h-64 md:w-64 md:h-80"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+        ) : null
+      }
+      <div
+        class="hidden w-56 h-64 md:w-64 md:h-80 rounded-2xl bg-blue-800 items-center justify-center text-blue-300 text-sm"
+        id="photo-placeholder"
+      >
+        Foto volgt
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+---
+import { site } from "../data/site";
+import "../styles/global.css";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Certificates from "../components/Certificates.astro";
+import ServiceArea from "../components/ServiceArea.astro";
+import Tariff from "../components/Tariff.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+
+const { owner, business, contact } = site;
+const canonicalUrl = `https://${business.domain}`;
+const ogDescription =
+  "Gecertificeerde loodgieter in Almere. Lekkages, kranen, sifons, sanitair. NEN 1006/1078/3215. 30 jaar ervaring. Bel of plan een afspraak.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: owner.name,
+  description: business.intro_nl,
+  url: canonicalUrl,
+  telephone: contact.phone_tel,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: owner.city,
+    addressCountry: "NL",
+  },
+  areaServed: [
+    business.service_area.primary,
+    ...business.service_area.also,
+  ],
+  image: `${canonicalUrl}${contact.photo}`,
+};
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>Loodgieter Almere — Vladimir Porva | NEN-gecertificeerd</title>
+    <meta name="description" content={ogDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content="Loodgieter Almere — Vladimir Porva | NEN-gecertificeerd" />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={`${canonicalUrl}${contact.photo}`} />
+    <meta property="og:locale" content="nl_NL" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="font-sans antialiased text-gray-900">
+    <Hero />
+    <Services />
+    <Certificates />
+    <ServiceArea />
+    <Tariff />
+    <ContactCTA />
+  </body>
+</html>
