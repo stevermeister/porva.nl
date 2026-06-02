@@ -28,25 +28,11 @@ export const site = {
     ],
     certificates: [
       {
-        name: "NEN 1006",
-        subtitle: "Drinkwaterinstallaties",
+        name: "Loodgieter Nederland",
+        subtitle: "NEN 1006 (drinkwater), NEN 1078 (gas), NEN 3215 (afvoer)",
         issuer: "INT Education Services (CRKBO)",
         year: 2023,
-        image: "/certificaten/nen-1006.jpg",
-      },
-      {
-        name: "NEN 1078",
-        subtitle: "Gasinstallaties",
-        issuer: "INT Education Services (CRKBO)",
-        year: 2023,
-        image: "/certificaten/nen-1078.jpg",
-      },
-      {
-        name: "NEN 3215",
-        subtitle: "Afvoerleidingen",
-        issuer: "INT Education Services (CRKBO)",
-        year: 2023,
-        image: "/certificaten/nen-3215.jpg",
+        image: "/certificaten/loodgieter-nen.jpg",
       },
       {
         name: "Bouwnormen Nederland",
