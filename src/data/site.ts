@@ -6,7 +6,7 @@ export const site = {
   },
   business: {
     domain: "porva.nl",
-    tagline_nl: "Loodgieter & klusser in Almere",
+    tagline_nl: "Loodgieter & klusser uit de Stripheldenbuurt",
     intro_nl:
       "Gecertificeerd loodgieter (NEN 1006/1078/3215) met 30 jaar ervaring. Werkzaam in Almere en omgeving.",
     service_area: {

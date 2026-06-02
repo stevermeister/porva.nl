@@ -27,6 +27,7 @@ const jsonLd = {
   },
   areaServed: [
     business.service_area.primary,
+    "Stripheldenbuurt",
     ...business.service_area.also,
   ],
   image: `${canonicalUrl}${contact.photo}`,
@@ -40,7 +41,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>Loodgieter Almere — Vladimir Porva | NEN-gecertificeerd</title>
+    <title>Loodgieter Almere — Vladimir Porva | Uit de Stripheldenbuurt</title>
     <meta name="description" content={ogDescription} />
     <link rel="canonical" href={canonicalUrl} />
 
@@ -52,7 +53,7 @@ const jsonLd = {
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content="Loodgieter Almere — Vladimir Porva | NEN-gecertificeerd" />
+    <meta property="og:title" content="Loodgieter Almere — Vladimir Porva | Uit de Stripheldenbuurt" />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={`${canonicalUrl}${contact.photo}`} />
     <meta property="og:locale" content="nl_NL" />
