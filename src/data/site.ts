@@ -44,7 +44,7 @@ export const site = {
     ],
   },
   tariff: {
-    hourly_eur: 50,
+    starting_from_eur: 35,
     callout_within_primary_eur: 0,
     materials_billed_separately: true,
   },
