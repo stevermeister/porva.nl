@@ -52,6 +52,6 @@ export const site = {
     phone_display: "085 799 0777",
     phone_tel: "+31857990777",
     booking_url: "TBD",
-    photo: "/foto/vladimir.jpg",
+    photo: "/foto/vlad.png",
   },
 } as const;
