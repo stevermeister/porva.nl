@@ -14,12 +14,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.resolve(__dirname, "../public");
 const VLAD = path.join(PUBLIC, "foto/vlad.png");
 
-// ─── Source image facts (1472 × 2872, transparent bg) ───────────────────────
+// ─── Source image facts (transparent bg) ─────────────────────────────────────
 // The head occupies roughly the top 30% of height.
 // We crop a square from the top-centre to capture face + upper torso.
-const SRC_W = 1472;
-const FACE_SIZE = 860; // square crop — head + shoulders
-const FACE_LEFT = Math.round((SRC_W - FACE_SIZE) / 2); // 306
+const srcMeta = await sharp(VLAD).metadata();
+const SRC_W = srcMeta.width;
+const FACE_SIZE = Math.min(860, SRC_W); // square crop — head + shoulders
+const FACE_LEFT = Math.round((SRC_W - FACE_SIZE) / 2);
 
 const face = await sharp(VLAD)
   .extract({ left: FACE_LEFT, top: 0, width: FACE_SIZE, height: FACE_SIZE })
