@@ -7,24 +7,40 @@ const { tariff, business } = site;
 <section class="bg-cream-alt py-14 border-t border-navy/10" id="tarief">
   <div class="mx-auto max-w-6xl px-6">
     <h2 class="font-heading text-3xl font-bold text-navy mb-8">Tarief</h2>
-    <div class="flex flex-col sm:flex-row gap-6 max-w-xl">
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-navy/10 text-center flex-1">
-        <p class="text-5xl font-bold text-navy mb-1">
-          vanaf €{tariff.starting_from_eur}
-          <span class="text-2xl font-medium text-gray-400">/uur</span>
-        </p>
-        <p class="text-gray-400 text-sm mt-1">tarief in overleg</p>
-      </div>
 
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-navy/10 text-center flex-1">
-        <p class="text-5xl font-bold text-green-600 mb-1">
-          €{tariff.callout_within_primary_eur}
-        </p>
-        <p class="text-gray-400 text-sm mt-1">voorrijkosten in {business.service_area.primary}</p>
+    <div
+      class="bg-white rounded-2xl border border-navy/10 shadow-sm overflow-hidden max-w-2xl"
+    >
+      <div class="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-navy/10">
+        <!-- Hourly rate -->
+        <div class="flex-1 px-8 py-8 text-center">
+          <p class="font-heading text-5xl font-bold text-navy leading-none">
+            €{tariff.starting_from_eur}
+          </p>
+          <p class="text-gray-400 text-base mt-1">/uur</p>
+          <p class="text-gray-400 text-xs uppercase tracking-wide mt-2">tarief in overleg</p>
+        </div>
+
+        <!-- Callout fee -->
+        <div class="flex-1 px-8 py-8 text-center">
+          <p class="font-heading text-5xl font-bold text-green-600 leading-none">
+            €{tariff.callout_within_primary_eur}
+          </p>
+          <p class="text-gray-400 text-base mt-1">voorrijkosten</p>
+          <p class="text-gray-400 text-xs uppercase tracking-wide mt-2">
+            in {business.service_area.primary}
+          </p>
+        </div>
+
+        <!-- Materials -->
+        <div class="flex-1 px-8 py-8 text-center">
+          <p class="font-heading text-2xl font-bold text-navy/40 leading-none pt-2">
+            Materiaal
+          </p>
+          <p class="text-gray-400 text-base mt-1">apart</p>
+          <p class="text-gray-400 text-xs uppercase tracking-wide mt-2">gefactureerd na klus</p>
+        </div>
       </div>
     </div>
-    <p class="mt-5 text-gray-400 text-sm">
-      Materiaal wordt apart gefactureerd.
-    </p>
   </div>
 </section>

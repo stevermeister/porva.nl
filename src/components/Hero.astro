@@ -49,16 +49,21 @@ const { owner, business, contact } = site;
       </div>
     </div>
 
-    <!-- Mascot column — ~45% width on desktop, anchored to bottom -->
+    <!-- Mascot column — ~45% width on desktop, anchored at bottom -->
     <div class="flex-shrink-0 md:w-[45%] flex flex-col items-center md:items-end justify-end relative">
-      <!-- Soft ground shadow -->
+      <!-- Soft radial aura behind mascot -->
       <div
-        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 md:w-72 h-5 bg-navy/10 rounded-full blur-xl pointer-events-none"
+        class="absolute inset-0 pointer-events-none"
+        style="background: radial-gradient(ellipse 85% 55% at 50% 82%, #E8F0F8 0%, transparent 70%);"
+      ></div>
+      <!-- Ground shadow ellipse -->
+      <div
+        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-44 md:w-80 h-4 bg-navy/20 rounded-full blur-2xl pointer-events-none"
       ></div>
       <img
         src={contact.photo}
         alt={`${owner.name}, loodgieter in ${owner.city}`}
-        class="relative w-72 sm:w-80 md:w-full md:max-h-[580px] object-contain object-bottom"
+        class="relative w-[70%] max-w-[280px] sm:max-w-[320px] md:w-full md:max-w-none md:max-h-[580px] object-contain object-bottom"
       />
     </div>
   </div>

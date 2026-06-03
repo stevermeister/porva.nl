@@ -5,6 +5,7 @@ import Hero from "../components/Hero.astro";
 import Services from "../components/Services.astro";
 import Certificates from "../components/Certificates.astro";
 import ServiceArea from "../components/ServiceArea.astro";
+import CustomProjects from "../components/CustomProjects.astro";
 import Tariff from "../components/Tariff.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 
@@ -70,11 +71,11 @@ const jsonLd = {
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Display font: Bricolage Grotesque -->
+    <!-- Display font: Bricolage Grotesque + handwritten: Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -83,6 +84,7 @@ const jsonLd = {
     <Services />
     <Certificates />
     <ServiceArea />
+    <CustomProjects />
     <Tariff />
     <ContactCTA />
   </body>

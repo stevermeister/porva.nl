@@ -42,6 +42,34 @@ export const site = {
         image: "/certificaten/bouwnormen.jpg",
       },
     ],
+    custom_projects: {
+      title: "Grotere projecten op maat",
+      intro:
+        "Voor verbouwingen, badkamerrenovaties of complete installaties — niet alleen vakkundig uitvoeren, maar ook plannen vooraf.",
+      services: [
+        {
+          icon: "pencil",
+          title: "Ontwerp & planning",
+          description: "Doordachte aanpak voor grotere klussen",
+        },
+        {
+          icon: "cube",
+          title: "3D-visualisatie",
+          description: "Zie het eindresultaat vóór de uitvoering",
+        },
+        {
+          icon: "calculator",
+          title: "Materiaalberekening",
+          description: "Precieze offerte zonder verrassingen",
+        },
+        {
+          icon: "hammer",
+          title: "Volledige uitvoering",
+          description: "Van ontwerp tot oplevering — of alleen het ontwerp",
+        },
+      ],
+      cta: "Plan een vrijblijvend gesprek",
+    },
   },
   tariff: {
     starting_from_eur: 35,

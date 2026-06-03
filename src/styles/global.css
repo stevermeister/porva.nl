@@ -8,18 +8,22 @@
   --color-orange-dark: #C46A00;
   --color-blue-accent: #2C5282;
   --font-heading: 'Bricolage Grotesque', Inter, sans-serif;
+  --font-handwritten: 'Caveat', cursive;
 }
 
-/* Polaroid tilt on certificate cards */
+/* Polaroid tilt + offset shadow on certificate cards */
 .cert-card-even {
-  transform: rotate(-1.5deg);
+  transform: rotate(-2deg);
+  box-shadow: 4px 10px 30px rgba(26, 46, 74, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .cert-card-odd {
-  transform: rotate(1.5deg);
+  transform: rotate(2deg);
+  box-shadow: -4px 10px 30px rgba(26, 46, 74, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .cert-card-even:hover,
 .cert-card-odd:hover {
-  transform: rotate(0deg) translateY(-6px);
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(26, 46, 74, 0.18);
 }

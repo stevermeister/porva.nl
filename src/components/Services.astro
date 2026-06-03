@@ -15,12 +15,14 @@ const iconMap: Record<string, string> = {
     <h2 class="font-heading text-3xl font-bold text-navy mb-10">Diensten</h2>
     <div class="grid md:grid-cols-2 gap-10">
       <!-- Loodgieterswerk -->
-      <div class="bg-cream rounded-2xl p-8 border border-navy/10">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="inline-block w-1 h-7 bg-blue-accent rounded-full"></span>
-          <h3 class="font-heading text-xl font-bold text-navy">Loodgieterswerk</h3>
+      <div
+        class="bg-cream rounded-2xl p-10 border border-navy/10 hover:shadow-md hover:-translate-y-1 transition-all"
+      >
+        <div class="flex items-center gap-3 mb-7">
+          <span class="inline-block w-1 h-8 bg-blue-accent rounded-full"></span>
+          <h3 class="font-heading text-2xl font-bold text-navy">Loodgieterswerk</h3>
         </div>
-        <ul class="space-y-4">
+        <ul class="space-y-5">
           {
             services_primary.map((svc) => (
               <li class="flex items-start gap-4">
@@ -33,17 +35,19 @@ const iconMap: Record<string, string> = {
       </div>
 
       <!-- Allround klussen -->
-      <div class="bg-cream rounded-2xl p-8 border border-navy/10">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="inline-block w-1 h-7 bg-orange rounded-full"></span>
-          <h3 class="font-heading text-xl font-bold text-navy">Allround klussen</h3>
+      <div
+        class="bg-cream rounded-2xl p-10 border border-navy/10 hover:shadow-md hover:-translate-y-1 transition-all"
+      >
+        <div class="flex items-center gap-3 mb-7">
+          <span class="inline-block w-1 h-8 bg-orange rounded-full"></span>
+          <h3 class="font-heading text-2xl font-bold text-navy">Allround klussen</h3>
         </div>
-        <ul class="space-y-3">
+        <ul class="space-y-4">
           {
             services_secondary.map((svc) => (
               <li class="flex items-center gap-3 text-navy/70">
                 <svg
-                  class="w-4 h-4 text-orange flex-shrink-0"
+                  class="w-5 h-5 text-orange flex-shrink-0"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
