@@ -4,7 +4,7 @@ import { site } from "../data/site";
 const { owner, business, contact } = site;
 ---
 
-<section class="bg-cream overflow-hidden">
+<section class="bg-cream">
   <div
     class="mx-auto max-w-6xl px-6 pt-8 md:pt-20 flex flex-col md:flex-row md:items-end gap-4 md:gap-8"
   >
@@ -57,22 +57,17 @@ const { owner, business, contact } = site;
 
     <!-- Mascot column — ~45% width on desktop, anchored at bottom -->
     <div class="flex-shrink-0 md:w-[45%] flex flex-col items-center md:items-end justify-end relative">
-      <!-- Warm aura: covers full column, behind everything -->
-      <div
-        class="absolute inset-0 pointer-events-none"
-        style="background: radial-gradient(ellipse 85% 55% at 50% 88%, rgba(224,123,0,0.10) 0%, #E8F0F8 35%, transparent 70%);"
-      ></div>
-      <!-- Image wrapper: shadow is scoped to the image width, not the column -->
+      <!-- Image wrapper: shadow scoped to image width -->
       <div class="relative w-[75%] max-w-[300px] sm:max-w-[320px] md:w-full md:max-w-none">
-        <!-- Ground shadow: centered under mascot's feet -->
+        <!-- Ground shadow: tight ellipse just under mascot's feet -->
         <div
-          class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-10 pointer-events-none"
-          style="background: radial-gradient(ellipse at center bottom, rgba(44, 82, 130, 0.18), transparent 70%);"
+          class="absolute left-1/2 -translate-x-1/2 pointer-events-none z-0"
+          style="bottom: -8px; width: 60%; height: 24px; background: radial-gradient(ellipse at center, rgba(44, 82, 130, 0.25), transparent 65%); filter: blur(4px);"
         ></div>
         <img
           src={contact.photo}
           alt={`${owner.name}, loodgieter in ${owner.city}`}
-          class="relative w-full md:max-h-[580px] object-contain object-bottom"
+          class="relative z-10 w-full md:max-h-[580px] object-contain object-bottom"
         />
       </div>
     </div>
