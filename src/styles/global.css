@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@theme {
+  --color-cream: #FBF7F0;
+  --color-cream-alt: #F0EAE0;
+  --color-navy: #1A2E4A;
+  --color-orange: #E07B00;
+  --color-orange-dark: #C46A00;
+  --color-blue-accent: #2C5282;
+  --font-heading: 'Bricolage Grotesque', Inter, sans-serif;
+}
+
+/* Polaroid tilt on certificate cards */
+.cert-card-even {
+  transform: rotate(-1.5deg);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cert-card-odd {
+  transform: rotate(1.5deg);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cert-card-even:hover,
+.cert-card-odd:hover {
+  transform: rotate(0deg) translateY(-6px);
+}

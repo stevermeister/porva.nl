@@ -4,22 +4,22 @@ import { site } from "../data/site";
 const { owner, business, contact } = site;
 ---
 
-<section class="bg-[#1a4d7a] text-white overflow-hidden">
+<section class="bg-cream overflow-hidden">
   <div
-    class="mx-auto max-w-6xl px-6 pt-16 md:pt-20 flex flex-col md:flex-row md:items-end gap-8 md:gap-12"
+    class="mx-auto max-w-6xl px-6 pt-16 md:pt-20 flex flex-col md:flex-row md:items-end gap-6 md:gap-8"
   >
-    <!-- Text column — full width mobile, ~60% desktop -->
-    <div class="flex-1 min-w-0 pb-16 md:pb-20">
-      <p class="text-[#d97706] font-semibold tracking-wide uppercase text-sm mb-3">
+    <!-- Text column -->
+    <div class="flex-1 min-w-0 pb-12 md:pb-20">
+      <p class="text-orange font-semibold tracking-wide uppercase text-sm mb-3">
         {owner.city} &amp; omgeving
       </p>
-      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+      <h1 class="font-heading text-5xl md:text-6xl font-bold leading-tight mb-4 text-navy">
         {owner.name}
       </h1>
-      <p class="text-xl md:text-2xl font-medium text-blue-200 mb-4">
+      <p class="text-xl md:text-2xl font-semibold text-navy/70 mb-4">
         {business.tagline_nl}
       </p>
-      <p class="text-blue-100 text-base md:text-lg leading-relaxed mb-8 max-w-xl">
+      <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-8 max-w-xl">
         {business.intro_nl}
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
@@ -27,13 +27,13 @@ const { owner, business, contact } = site;
           contact.booking_url !== "TBD" ? (
             <a
               href={contact.booking_url}
-              class="inline-block bg-[#d97706] hover:bg-[#b45309] text-white font-semibold px-7 py-3 rounded-lg text-center transition-colors"
+              class="inline-block bg-orange hover:bg-orange-dark text-white font-semibold px-7 py-3 rounded-xl text-center transition-colors shadow-sm"
             >
               Plan een afspraak
             </a>
           ) : (
             <span
-              class="inline-block bg-[#d97706] opacity-60 cursor-not-allowed text-white font-semibold px-7 py-3 rounded-lg text-center"
+              class="inline-block bg-orange opacity-60 cursor-not-allowed text-white font-semibold px-7 py-3 rounded-xl text-center"
               title="Binnenkort beschikbaar"
             >
               Plan een afspraak
@@ -42,19 +42,23 @@ const { owner, business, contact } = site;
         }
         <a
           href={`tel:${contact.phone_tel}`}
-          class="inline-block border-2 border-white hover:bg-white hover:text-[#1a4d7a] text-white font-semibold px-7 py-3 rounded-lg text-center transition-colors"
+          class="inline-block border-2 border-orange hover:bg-orange hover:text-white text-orange font-semibold px-7 py-3 rounded-xl text-center transition-colors"
         >
           Bel direct: {contact.phone_display}
         </a>
       </div>
     </div>
 
-    <!-- Mascot column — below text on mobile, right side on desktop, sitting at the bottom -->
-    <div class="flex-shrink-0 flex justify-center md:justify-end">
+    <!-- Mascot column — ~45% width on desktop, anchored to bottom -->
+    <div class="flex-shrink-0 md:w-[45%] flex flex-col items-center md:items-end justify-end relative">
+      <!-- Soft ground shadow -->
+      <div
+        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 md:w-72 h-5 bg-navy/10 rounded-full blur-xl pointer-events-none"
+      ></div>
       <img
         src={contact.photo}
         alt={`${owner.name}, loodgieter in ${owner.city}`}
-        class="w-56 sm:w-64 md:w-auto md:max-h-[480px] object-contain object-bottom drop-shadow-2xl"
+        class="relative w-72 sm:w-80 md:w-full md:max-h-[580px] object-contain object-bottom"
       />
     </div>
   </div>

@@ -4,18 +4,18 @@ import { site } from "../data/site";
 const { contact, owner, business } = site;
 ---
 
-<section class="bg-[#1a4d7a] py-12" id="contact">
+<section class="bg-cream py-16 border-t border-navy/10" id="contact">
   <div class="mx-auto max-w-6xl px-6 text-center">
-    <h2 class="text-2xl font-bold text-white mb-2">Contact</h2>
-    <p class="text-blue-200 text-base mb-7 max-w-sm mx-auto">
+    <h2 class="font-heading text-3xl font-bold text-navy mb-2">Contact</h2>
+    <p class="text-navy/50 text-base mb-8 max-w-sm mx-auto">
       Bel direct — {owner.displayName} reageert snel.
     </p>
 
     <a
       href={`tel:${contact.phone_tel}`}
-      class="inline-flex items-center gap-3 bg-[#d97706] hover:bg-[#b45309] text-white font-semibold px-8 py-4 rounded-xl transition-colors text-lg shadow-lg"
+      class="inline-flex items-center gap-3 bg-orange hover:bg-orange-dark text-white font-semibold px-10 py-4 rounded-xl transition-colors text-xl shadow-md"
     >
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
         <path
           d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
         />
@@ -23,11 +23,11 @@ const { contact, owner, business } = site;
       Bel {contact.phone_display}
     </a>
 
-    <p class="mt-4 text-blue-300 text-sm tracking-wide">{contact.phone_display}</p>
+    <p class="mt-5 text-navy/30 text-sm tracking-wide">{contact.phone_display}</p>
   </div>
 </section>
 
-<footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm">
+<footer class="bg-cream-alt border-t border-navy/10 text-navy/40 py-6 text-center text-sm">
   <p>
     &copy; {new Date().getFullYear()}
     {owner.name} — {business.domain}

@@ -69,8 +69,16 @@ const jsonLd = {
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Display font: Bricolage Grotesque -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="font-sans antialiased text-gray-900">
+  <body class="bg-cream font-sans antialiased text-navy">
     <Hero />
     <Services />
     <Certificates />

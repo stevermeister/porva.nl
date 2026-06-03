@@ -4,23 +4,23 @@ import { site } from "../data/site";
 const { tariff, business } = site;
 ---
 
-<section class="bg-gray-50 py-14 border-t border-gray-100" id="tarief">
+<section class="bg-cream-alt py-14 border-t border-navy/10" id="tarief">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8">Tarief</h2>
+    <h2 class="font-heading text-3xl font-bold text-navy mb-8">Tarief</h2>
     <div class="flex flex-col sm:flex-row gap-6 max-w-xl">
-      <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center flex-1">
-        <p class="text-4xl font-bold text-[#1a4d7a] mb-1">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-navy/10 text-center flex-1">
+        <p class="text-5xl font-bold text-navy mb-1">
           vanaf €{tariff.starting_from_eur}
-          <span class="text-xl font-medium text-gray-500">/uur</span>
+          <span class="text-2xl font-medium text-gray-400">/uur</span>
         </p>
-        <p class="text-gray-500 text-sm">tarief in overleg</p>
+        <p class="text-gray-400 text-sm mt-1">tarief in overleg</p>
       </div>
 
-      <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center flex-1">
-        <p class="text-4xl font-bold text-green-600 mb-1">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-navy/10 text-center flex-1">
+        <p class="text-5xl font-bold text-green-600 mb-1">
           €{tariff.callout_within_primary_eur}
         </p>
-        <p class="text-gray-500 text-sm">voorrijkosten in {business.service_area.primary}</p>
+        <p class="text-gray-400 text-sm mt-1">voorrijkosten in {business.service_area.primary}</p>
       </div>
     </div>
     <p class="mt-5 text-gray-400 text-sm">
