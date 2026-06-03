@@ -1,6 +1,8 @@
 /**
- * Generates favicon set and OG social preview image from public/foto/vlad.png.
- * Idempotent — safe to re-run when the source illustration changes.
+ * Generates favicon set and OG social preview image.
+ *
+ * Favicons come from public/favicon-source.svg (navy background, orange wrench).
+ * OG image still uses the full-body mascot from public/foto/vlad.png.
  *
  * Usage: npm run generate-icons
  */
@@ -13,56 +15,34 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.resolve(__dirname, "../public");
 const VLAD = path.join(PUBLIC, "foto/vlad.png");
+const FAVICON_SVG = path.join(PUBLIC, "favicon-source.svg");
 
-// ─── Source image facts (transparent bg) ─────────────────────────────────────
-// The head occupies roughly the top 30% of height.
-// We crop a square from the top-centre to capture face + upper torso.
-const srcMeta = await sharp(VLAD).metadata();
-const SRC_W = srcMeta.width;
-const FACE_SIZE = Math.min(860, SRC_W); // square crop — head + shoulders
-const FACE_LEFT = Math.round((SRC_W - FACE_SIZE) / 2);
-
-const face = await sharp(VLAD)
-  .extract({ left: FACE_LEFT, top: 0, width: FACE_SIZE, height: FACE_SIZE })
-  .toBuffer();
-
-// ─── Favicon PNGs ────────────────────────────────────────────────────────────
-await sharp(face)
+// ─── Favicon PNGs from SVG source ────────────────────────────────────────────
+await sharp(FAVICON_SVG)
   .resize(32, 32)
   .png()
   .toFile(path.join(PUBLIC, "favicon-32x32.png"));
 console.log("✓ favicon-32x32.png");
 
-await sharp(face)
+await sharp(FAVICON_SVG)
   .resize(16, 16)
   .png()
   .toFile(path.join(PUBLIC, "favicon-16x16.png"));
 console.log("✓ favicon-16x16.png");
 
-// apple-touch-icon: 180×180, solid #1a4d7a background (iOS ignores transparency)
-const bg180 = await sharp({
-  create: {
-    width: 180,
-    height: 180,
-    channels: 4,
-    background: { r: 26, g: 77, b: 122, alpha: 1 },
-  },
-})
-  .png()
-  .toBuffer();
-
-const face152 = await sharp(face).resize(152, 152).png().toBuffer();
-
-await sharp(bg180)
-  .composite([{ input: face152, top: 14, left: 14 }])
+// apple-touch-icon: 180×180 — SVG already has navy background, no compositing needed
+await sharp(FAVICON_SVG)
+  .resize(180, 180)
   .png()
   .toFile(path.join(PUBLIC, "apple-touch-icon.png"));
 console.log("✓ apple-touch-icon.png");
 
-// ─── favicon.ico (multi-size: 32 + 16, PNG-inside-ICO) ───────────────────────
+// ─── favicon.ico (48 + 32 + 16, PNG-inside-ICO) ──────────────────────────────
+const ico48 = await sharp(FAVICON_SVG).resize(48, 48).png().toBuffer();
 const ico32 = readFileSync(path.join(PUBLIC, "favicon-32x32.png"));
 const ico16 = readFileSync(path.join(PUBLIC, "favicon-16x16.png"));
 writeFileSync(path.join(PUBLIC, "favicon.ico"), buildIco([
+  { size: 48, data: ico48 },
   { size: 32, data: ico32 },
   { size: 16, data: ico16 },
 ]));
