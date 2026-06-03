@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site";
 import "../styles/global.css";
+import MobileHeader from "../components/MobileHeader.astro";
 import Hero from "../components/Hero.astro";
 import Services from "../components/Services.astro";
 import Certificates from "../components/Certificates.astro";
@@ -8,6 +9,7 @@ import ServiceArea from "../components/ServiceArea.astro";
 import CustomProjects from "../components/CustomProjects.astro";
 import Tariff from "../components/Tariff.astro";
 import ContactCTA from "../components/ContactCTA.astro";
+import MobileBottomBar from "../components/MobileBottomBar.astro";
 
 const { owner, business, contact } = site;
 const canonicalUrl = `https://${business.domain}`;
@@ -79,7 +81,8 @@ const jsonLd = {
       rel="stylesheet"
     />
   </head>
-  <body class="bg-cream font-sans antialiased text-navy">
+  <body class="bg-cream font-sans antialiased text-navy pb-20 md:pb-0">
+    <MobileHeader />
     <Hero />
     <Services />
     <Certificates />
@@ -87,5 +90,6 @@ const jsonLd = {
     <CustomProjects />
     <Tariff />
     <ContactCTA />
+    <MobileBottomBar />
   </body>
 </html>

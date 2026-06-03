@@ -10,59 +10,69 @@ const iconMap: Record<string, string> = {
 };
 ---
 
-<section class="bg-white py-16" id="diensten">
+<section class="bg-white py-10 md:py-16" id="diensten">
   <div class="mx-auto max-w-6xl px-6">
-    <h2 class="font-heading text-3xl font-bold text-navy mb-10">Diensten</h2>
-    <div class="grid md:grid-cols-2 gap-10">
-      <!-- Loodgieterswerk -->
-      <div
-        class="bg-cream rounded-2xl p-10 border border-navy/10 hover:shadow-md hover:-translate-y-1 transition-all"
-      >
-        <div class="flex items-center gap-3 mb-7">
-          <span class="inline-block w-1 h-8 bg-blue-accent rounded-full"></span>
-          <h3 class="font-heading text-2xl font-bold text-navy">Loodgieterswerk</h3>
+    <h2 class="font-heading text-3xl font-bold text-navy mb-8 md:mb-10">Diensten</h2>
+    <div class="grid md:grid-cols-2 gap-6 md:gap-10">
+
+      <!-- Loodgieterswerk — primary emphasis on mobile via left accent strip -->
+      <div class="bg-cream rounded-2xl border border-navy/10 hover:shadow-md hover:-translate-y-1 transition-all overflow-hidden">
+        <div class="flex">
+          <!-- Mobile-only orange left accent strip -->
+          <div class="w-1 md:hidden flex-shrink-0 bg-orange"></div>
+          <div class="p-7 md:p-10 flex-1">
+            <div class="flex items-center gap-3 mb-6 md:mb-7">
+              <span class="hidden md:inline-block w-1 h-8 bg-blue-accent rounded-full"></span>
+              <h3 class="font-heading text-2xl font-bold text-navy">Loodgieterswerk</h3>
+            </div>
+            <ul class="space-y-4 md:space-y-5">
+              {
+                services_primary.map((svc) => (
+                  <li class="flex items-start gap-4">
+                    <span class="mt-0.5 text-orange flex-shrink-0" set:html={iconMap[svc.icon] ?? ""} />
+                    <span class="text-navy/80 font-medium">{svc.title}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
         </div>
-        <ul class="space-y-5">
-          {
-            services_primary.map((svc) => (
-              <li class="flex items-start gap-4">
-                <span class="mt-0.5 text-orange flex-shrink-0" set:html={iconMap[svc.icon] ?? ""} />
-                <span class="text-navy/80 font-medium">{svc.title}</span>
-              </li>
-            ))
-          }
-        </ul>
       </div>
 
-      <!-- Allround klussen -->
-      <div
-        class="bg-cream rounded-2xl p-10 border border-navy/10 hover:shadow-md hover:-translate-y-1 transition-all"
-      >
-        <div class="flex items-center gap-3 mb-7">
-          <span class="inline-block w-1 h-8 bg-orange rounded-full"></span>
-          <h3 class="font-heading text-2xl font-bold text-navy">Allround klussen</h3>
+      <!-- Allround klussen — more compact on mobile, 2-col item grid -->
+      <div class="bg-cream rounded-2xl border border-navy/10 hover:shadow-md hover:-translate-y-1 transition-all overflow-hidden">
+        <div class="flex">
+          <div class="w-1 md:hidden flex-shrink-0 bg-orange/40"></div>
+          <div class="p-7 md:p-10 flex-1">
+            <div class="flex items-center gap-3 mb-5 md:mb-7">
+              <span class="hidden md:inline-block w-1 h-8 bg-orange rounded-full"></span>
+              <h3 class="font-heading text-xl md:text-2xl font-bold text-navy">Allround klussen</h3>
+            </div>
+            <!-- 2-col grid on mobile, single col on desktop -->
+            <ul class="grid grid-cols-2 md:grid-cols-1 gap-x-3 gap-y-3 md:gap-y-4">
+              {
+                services_secondary.map((svc) => (
+                  <li class="flex items-center gap-2 md:gap-3 text-navy/70">
+                    <svg
+                      class="w-4 h-4 md:w-5 md:h-5 text-orange flex-shrink-0"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-sm md:text-base">{svc.title}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
         </div>
-        <ul class="space-y-4">
-          {
-            services_secondary.map((svc) => (
-              <li class="flex items-center gap-3 text-navy/70">
-                <svg
-                  class="w-5 h-5 text-orange flex-shrink-0"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                {svc.title}
-              </li>
-            ))
-          }
-        </ul>
       </div>
+
     </div>
   </div>
 </section>
