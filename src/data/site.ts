@@ -79,7 +79,12 @@ export const site = {
   contact: {
     phone_display: "085 799 0777",
     phone_tel: "+31857990777",
-    booking_url: "TBD",
+    booking_url: "https://calendar.app.google/A1UF3affvMf2nF6Y8",
+    whatsapp: {
+      number: "+31648215944",
+      url: "https://wa.me/31648215944?text=Hoi%20Vladimir%2C%20ik%20heb%20een%20klus%20voor%20je.",
+      display: "+31 6 48215944",
+    },
     photo: "/foto/vlad.png",
   },
 } as const;
