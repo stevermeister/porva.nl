@@ -8,12 +8,13 @@ const { contact, owner, business } = site;
   <div class="mx-auto max-w-6xl px-6 text-center">
     <h2 class="font-heading text-3xl font-bold text-navy mb-2">Contact</h2>
     <p class="text-navy/50 text-base mb-8 max-w-sm mx-auto">
-      Bel of stuur een WhatsApp — {owner.displayName} reageert snel.
+      Bel of stuur een WhatsApp. Onze digitale assistent neemt 24/7 op, of stuur ons direct een bericht.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a
         href={`tel:${contact.phone_tel}`}
+        title="Onze digitale assistent helpt u 24/7 met uw vraag, plant een afspraak in, of geeft uw bericht direct door aan Vladimir."
         class="inline-flex items-center justify-center gap-3 bg-orange hover:bg-orange-dark text-white font-semibold px-10 py-4 rounded-xl transition-colors text-xl shadow-md"
       >
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
