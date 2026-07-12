@@ -14,7 +14,7 @@ import MobileBottomBar from "../components/MobileBottomBar.astro";
 const { owner, business, contact } = site;
 const canonicalUrl = `https://${business.domain}`;
 const ogDescription =
-  "Gecertificeerde loodgieter in Almere. Lekkages, kranen, sifons, sanitair. NEN 1006/1078/3215. 30 jaar ervaring. Bel of plan een afspraak.";
+  "Gecertificeerde loodgieter en klusser in Almere. NEN 1006, 1078 en 3215, 30 jaar ervaring. Bel 085 799 0777 of WhatsApp voor een vrijblijvende offerte.";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -33,7 +33,63 @@ const jsonLd = {
     "Stripheldenbuurt",
     ...business.service_area.also,
   ],
+  priceRange: "€35-€50/uur",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "08:00",
+      closes: "18:00",
+    },
+  ],
   image: `${canonicalUrl}${contact.photo}`,
+};
+
+const serviceJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Loodgieterswerk",
+    provider: { "@type": "LocalBusiness", name: owner.name },
+    areaServed: "Almere en omgeving",
+    serviceType: "Plumbing",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Klusjeswerk",
+    provider: { "@type": "LocalBusiness", name: owner.name },
+    areaServed: "Almere en omgeving",
+    serviceType: "HandymanServices",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Schilderwerk",
+    provider: { "@type": "LocalBusiness", name: owner.name },
+    areaServed: "Almere en omgeving",
+    serviceType: "Painting",
+  },
+];
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: canonicalUrl,
+    },
+  ],
 };
 
 const websiteJsonLd = {
@@ -88,6 +144,8 @@ const websiteJsonLd = {
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-012NKVFYQE"></script>

@@ -33,6 +33,7 @@ export const site = {
         issuer: "INT Education Services (CRKBO)",
         year: 2023,
         image: "/certificaten/loodgieter-nen.jpg",
+        alt: "Certificaat Loodgieter Nederland NEN 1006, 1078, 3215",
       },
       {
         name: "Bouwnormen Nederland",
@@ -40,6 +41,7 @@ export const site = {
         issuer: "INT Education Services (CRKBO)",
         year: 2024,
         image: "/certificaten/bouwnormen.jpg",
+        alt: "Certificaat Bouwnormen Nederland 2024",
       },
     ],
     custom_projects: {

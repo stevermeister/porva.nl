@@ -22,10 +22,19 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 
 const title = "Kennisbank | Vladimir Porva";
 const description =
-  "Tips, tricks en uitleg voor kleine klussen en loodgieterwerk in Almere. Praktische gidsen van een gecertificeerde loodgieter.";
+  "Kennisbank met tips en uitleg over loodgieterwerk en klussen in Almere. Praktische gidsen van een NEN-gecertificeerde loodgieter met 30 jaar ervaring.";
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://porva.nl" },
+    { "@type": "ListItem", position: 2, name: "Kennisbank", item: "https://porva.nl/blog" },
+  ],
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} jsonLd={breadcrumbJsonLd}>
   <MobileHeader />
 
   <main>

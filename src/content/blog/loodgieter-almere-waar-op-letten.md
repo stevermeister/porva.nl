@@ -1,6 +1,6 @@
 ---
 title: "Loodgieter kiezen in Almere: waar moet je op letten?"
-description: "Complete gids voor het kiezen van een betrouwbare, NEN-gecertificeerde loodgieter in Almere: certificering, prijzen, voorrijkosten, spoed, garantie en een handige checklist."
+description: "Praktische gids voor het kiezen van een betrouwbare loodgieter in Almere: NEN-certificering, prijzen, voorrijkosten, spoed en garantie op een rij."
 publishDate: 2026-07-11
 category: loodgieter
 image: /blog/loodgieter-kiezen-cover.png
