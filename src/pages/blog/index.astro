@@ -1,0 +1,105 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import MobileHeader from "../../components/MobileHeader.astro";
+import MobileBottomBar from "../../components/MobileBottomBar.astro";
+
+const CATEGORY_LABELS: Record<string, string> = {
+  loodgieter: "Loodgieter",
+  klussen: "Klussen",
+  algemeen: "Algemeen",
+};
+
+const dateFormatter = new Intl.DateTimeFormat("nl-NL", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+const title = "Kennisbank | Vladimir Porva";
+const description =
+  "Tips, tricks en uitleg voor kleine klussen en loodgieterwerk in Almere. Praktische gidsen van een gecertificeerde loodgieter.";
+---
+
+<Layout title={title} description={description}>
+  <MobileHeader />
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-cream border-b border-navy/10 py-12 md:py-20">
+      <div class="mx-auto max-w-6xl px-6 text-center">
+        <p class="font-handwritten text-orange text-2xl md:text-3xl mb-1">
+          Kennisbank
+        </p>
+        <h1 class="font-heading text-3xl md:text-5xl font-bold text-navy mb-4">
+          Tips &amp; uitleg
+        </h1>
+        <p class="text-navy/60 text-base md:text-lg max-w-xl mx-auto">
+          Tips, tricks en uitleg voor kleine klussen en loodgieterwerk in
+          Almere.
+        </p>
+      </div>
+    </section>
+
+    <!-- Grid -->
+    <section class="bg-cream py-10 md:py-16">
+      <div class="mx-auto max-w-6xl px-6">
+        {
+          posts.length === 0 ? (
+            <p class="text-center text-navy/50">
+              Binnenkort verschijnen hier de eerste artikelen.
+            </p>
+          ) : (
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {posts.map((post) => (
+                <a
+                  href={`/blog/${post.id}`}
+                  class="group flex flex-col bg-white rounded-2xl overflow-hidden border border-navy/10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
+                >
+                  {post.data.image && (
+                    <div class="aspect-[16/10] overflow-hidden bg-cream-alt">
+                      <img
+                        src={post.data.image}
+                        alt={post.data.imageAlt ?? post.data.title}
+                        loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
+                  <div class="flex flex-col flex-1 p-5">
+                    <span class="self-start inline-block bg-orange/10 text-orange text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                      {CATEGORY_LABELS[post.data.category]}
+                    </span>
+                    <h2 class="font-heading text-xl font-bold text-navy leading-snug mb-2 group-hover:text-orange transition-colors">
+                      {post.data.title}
+                    </h2>
+                    <p class="text-navy/60 text-sm leading-relaxed line-clamp-3 mb-4">
+                      {post.data.description}
+                    </p>
+                    <div class="mt-auto flex items-center justify-between">
+                      <time
+                        datetime={post.data.publishDate.toISOString()}
+                        class="text-navy/40 text-xs"
+                      >
+                        {dateFormatter.format(post.data.publishDate)}
+                      </time>
+                      <span class="text-orange font-semibold text-sm">
+                        Lees meer →
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </section>
+  </main>
+
+  <MobileBottomBar />
+</Layout>

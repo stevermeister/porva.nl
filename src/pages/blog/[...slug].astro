@@ -1,0 +1,273 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import MobileHeader from "../../components/MobileHeader.astro";
+import MobileBottomBar from "../../components/MobileBottomBar.astro";
+import { site } from "../../data/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const { contact } = site;
+
+const CATEGORY_LABELS: Record<string, string> = {
+  loodgieter: "Loodgieter",
+  klussen: "Klussen",
+  algemeen: "Algemeen",
+};
+
+const dateFormatter = new Intl.DateTimeFormat("nl-NL", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+const related = (
+  await getCollection(
+    "blog",
+    ({ data, id }) =>
+      !data.draft &&
+      data.category === post.data.category &&
+      id !== post.id,
+  )
+)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+
+const siteUrl = "https://porva.nl";
+const canonicalUrl = `${siteUrl}/blog/${post.id}`;
+const ogImage = post.data.image ?? "/og-image.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishDate.toISOString(),
+  author: {
+    "@type": "Person",
+    name: post.data.author,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.owner.name,
+    url: siteUrl,
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonicalUrl,
+  },
+  ...(post.data.image
+    ? { image: `${siteUrl}${post.data.image}` }
+    : {}),
+};
+---
+
+<Layout
+  title={`${post.data.title} | Vladimir Porva`}
+  description={post.data.description}
+  canonical={canonicalUrl}
+  ogType="article"
+  ogImage={ogImage}
+  ogImageAlt={post.data.imageAlt}
+  jsonLd={jsonLd}
+>
+  <MobileHeader />
+
+  <main class="bg-cream">
+    <article class="mx-auto max-w-3xl px-6 py-10 md:py-16">
+      <!-- Header -->
+      <header class="mb-8">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-1 text-navy/40 hover:text-orange text-sm mb-6 transition-colors"
+        >
+          ← Kennisbank
+        </a>
+        <span
+          class="block w-fit bg-orange/10 text-orange text-xs font-semibold px-3 py-1 rounded-full mb-4"
+        >
+          {CATEGORY_LABELS[post.data.category]}
+        </span>
+        <h1
+          class="font-heading text-3xl md:text-5xl font-bold text-navy leading-tight mb-4"
+        >
+          {post.data.title}
+        </h1>
+        <div class="flex items-center gap-2 text-navy/50 text-sm">
+          <time datetime={post.data.publishDate.toISOString()}>
+            {dateFormatter.format(post.data.publishDate)}
+          </time>
+          <span>·</span>
+          <span>{post.data.author}</span>
+        </div>
+      </header>
+
+      <!-- Hero image -->
+      {
+        post.data.image && (
+          <img
+            src={post.data.image}
+            alt={post.data.imageAlt ?? post.data.title}
+            class="w-full rounded-2xl mb-10 aspect-[16/9] object-cover"
+          />
+        )
+      }
+
+      <!-- Content -->
+      <div class="prose-blog">
+        <Content />
+      </div>
+
+      <!-- Back link -->
+      <div class="mt-12 pt-8 border-t border-navy/10">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-1 text-orange font-semibold hover:text-orange-dark transition-colors"
+        >
+          Terug naar overzicht →
+        </a>
+      </div>
+    </article>
+
+    <!-- Related posts -->
+    {
+      related.length > 0 && (
+        <section class="bg-cream-alt border-t border-navy/10 py-12 md:py-16">
+          <div class="mx-auto max-w-6xl px-6">
+            <h2 class="font-heading text-2xl font-bold text-navy mb-6 text-center">
+              Lees ook
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {related.map((r) => (
+                <a
+                  href={`/blog/${r.id}`}
+                  class="group flex flex-col bg-white rounded-2xl overflow-hidden border border-navy/10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
+                >
+                  {r.data.image && (
+                    <div class="aspect-[16/10] overflow-hidden bg-cream-alt">
+                      <img
+                        src={r.data.image}
+                        alt={r.data.imageAlt ?? r.data.title}
+                        loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
+                  <div class="flex flex-col flex-1 p-5">
+                    <h3 class="font-heading text-lg font-bold text-navy leading-snug mb-2 group-hover:text-orange transition-colors">
+                      {r.data.title}
+                    </h3>
+                    <p class="text-navy/60 text-sm leading-relaxed line-clamp-2">
+                      {r.data.description}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+  </main>
+
+  <MobileBottomBar />
+</Layout>
+
+<style>
+  .prose-blog {
+    color: rgba(26, 46, 74, 0.85);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  .prose-blog :global(h1) {
+    font-family: "Bricolage Grotesque", Inter, sans-serif;
+    font-weight: 700;
+    font-size: 1.875rem;
+    color: #1a2e4a;
+    line-height: 1.2;
+    margin: 2rem 0 1rem;
+  }
+  .prose-blog :global(h2) {
+    font-family: "Bricolage Grotesque", Inter, sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #1a2e4a;
+    line-height: 1.3;
+    margin: 2rem 0 0.75rem;
+  }
+  .prose-blog :global(h3) {
+    font-family: "Bricolage Grotesque", Inter, sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #1a2e4a;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .prose-blog :global(p) {
+    margin: 0 0 1.25rem;
+  }
+  .prose-blog :global(ul),
+  .prose-blog :global(ol) {
+    margin: 0 0 1.25rem;
+    padding-left: 1.5rem;
+  }
+  .prose-blog :global(ul) {
+    list-style: disc;
+  }
+  .prose-blog :global(ol) {
+    list-style: decimal;
+  }
+  .prose-blog :global(li) {
+    margin: 0.375rem 0;
+  }
+  .prose-blog :global(li::marker) {
+    color: #e07b00;
+  }
+  .prose-blog :global(a) {
+    color: #e07b00;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-blog :global(a:hover) {
+    color: #c46a00;
+  }
+  .prose-blog :global(strong) {
+    color: #1a2e4a;
+    font-weight: 700;
+  }
+  .prose-blog :global(blockquote) {
+    border-left: 3px solid #e07b00;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: rgba(26, 46, 74, 0.65);
+    font-style: italic;
+  }
+  .prose-blog :global(code) {
+    background: #f0eae0;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.375rem;
+    font-size: 0.9em;
+  }
+  .prose-blog :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(26, 46, 74, 0.1);
+    margin: 2rem 0;
+  }
+  .prose-blog :global(img) {
+    border-radius: 1rem;
+    margin: 1.5rem 0;
+  }
+</style>
