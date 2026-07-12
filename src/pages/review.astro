@@ -1,0 +1,108 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MobileHeader from "../components/MobileHeader.astro";
+import MobileBottomBar from "../components/MobileBottomBar.astro";
+import { site } from "../data/site";
+
+const { owner } = site;
+const reviewUrl = "https://g.page/r/CeJAqhX34WwfEBM/review";
+
+const title = "Laat een review achter | Vladimir Porva";
+const description =
+  "Tevreden over het werk van Vladimir Porva? Laat een Google-review achter — scan de QR-code of klik op de knop. Alvast bedankt!";
+---
+
+<Layout title={title} description={description}>
+  <MobileHeader />
+
+  <main class="bg-cream">
+    <section class="py-12 md:py-20">
+      <div class="mx-auto max-w-2xl px-6 text-center">
+        <p class="font-handwritten text-orange text-2xl md:text-3xl mb-1">
+          Alvast bedankt!
+        </p>
+        <h1 class="font-heading text-3xl md:text-5xl font-bold text-navy mb-4">
+          Tevreden over het werk?
+        </h1>
+        <p class="text-navy/60 text-base md:text-lg max-w-lg mx-auto mb-10">
+          Een review op Google helpt {owner.displayName} enorm en helpt buren in
+          Almere om een betrouwbare loodgieter te vinden. Het kost je maar een
+          minuutje.
+        </p>
+
+        <!-- QR + CTA card -->
+        <div
+          class="bg-white rounded-2xl border border-navy/10 shadow-sm p-6 md:p-10 max-w-md mx-auto"
+        >
+          <img
+            src="/review-qr.svg"
+            alt="QR-code die naar de Google-reviewpagina van Vladimir Porva leidt"
+            width="320"
+            height="320"
+            class="w-56 h-56 md:w-72 md:h-72 mx-auto"
+          />
+
+          <p class="text-navy/50 text-sm mt-5 mb-6">
+            Scan de QR-code met je telefoon, of gebruik de knop hieronder.
+          </p>
+
+          <a
+            href={reviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-review-cta
+            class="inline-flex items-center justify-center gap-3 w-full bg-orange hover:bg-orange-dark text-white font-semibold px-8 py-4 rounded-xl transition-colors text-lg shadow-md"
+          >
+            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+            Schrijf een Google-review
+          </a>
+        </div>
+
+        <!-- Steps -->
+        <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+          {
+            [
+              { n: "1", t: "Scan of klik", d: "Open de reviewpagina op Google." },
+              { n: "2", t: "Geef sterren", d: "Kies je waardering en schrijf kort je ervaring." },
+              { n: "3", t: "Plaatsen", d: "Klik op plaatsen — en klaar. Bedankt!" },
+            ].map((s) => (
+              <div class="bg-white rounded-2xl border border-navy/10 p-5">
+                <div class="w-9 h-9 rounded-full bg-orange/10 text-orange font-heading font-bold flex items-center justify-center mb-3">
+                  {s.n}
+                </div>
+                <h2 class="font-heading font-bold text-navy mb-1">{s.t}</h2>
+                <p class="text-navy/60 text-sm leading-relaxed">{s.d}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <a
+          href="/"
+          class="inline-block mt-10 text-navy/40 hover:text-orange text-sm transition-colors"
+        >
+          ← Terug naar de homepage
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <MobileBottomBar />
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("a[data-review-cta]").forEach(function (link) {
+        link.addEventListener("click", function () {
+          if (typeof gtag !== "undefined") {
+            gtag("event", "click_review", { event_category: "engagement" });
+          }
+          if (typeof clarity !== "undefined") {
+            clarity("event", "click_review");
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

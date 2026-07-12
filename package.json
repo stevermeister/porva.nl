@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "generate-icons": "node scripts/generate-icons.mjs",
-    "recenter-mascot": "node scripts/recenter-mascot.mjs"
+    "recenter-mascot": "node scripts/recenter-mascot.mjs",
+    "generate-review-qr": "node scripts/generate-review-qr.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -19,5 +20,8 @@
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.2",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
   }
 }
