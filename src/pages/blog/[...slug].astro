@@ -74,6 +74,24 @@ const jsonLd = {
     ? { image: `${siteUrl}${post.data.image}` }
     : {}),
 };
+
+const faqJsonLd =
+  post.data.faq && post.data.faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.data.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
+const structuredData = faqJsonLd ? [jsonLd, faqJsonLd] : jsonLd;
 ---
 
 <Layout
@@ -83,7 +101,7 @@ const jsonLd = {
   ogType="article"
   ogImage={ogImage}
   ogImageAlt={post.data.imageAlt}
-  jsonLd={jsonLd}
+  jsonLd={structuredData}
 >
   <MobileHeader />
 
@@ -269,5 +287,38 @@ const jsonLd = {
   .prose-blog :global(img) {
     border-radius: 1rem;
     margin: 1.5rem 0;
+  }
+  .prose-blog :global(table) {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 1px 3px rgba(26, 46, 74, 0.08);
+  }
+  .prose-blog :global(thead) {
+    background: #1a2e4a;
+  }
+  .prose-blog :global(th) {
+    color: #fbf7f0;
+    text-align: left;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+  }
+  .prose-blog :global(td) {
+    padding: 0.7rem 1rem;
+    border-top: 1px solid rgba(26, 46, 74, 0.08);
+  }
+  .prose-blog :global(tbody tr:nth-child(even)) {
+    background: #faf6ee;
+  }
+  .prose-blog :global(td:last-child) {
+    font-weight: 600;
+    color: #1a2e4a;
+    white-space: nowrap;
   }
 </style>
