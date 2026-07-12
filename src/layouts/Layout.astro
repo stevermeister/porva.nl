@@ -10,6 +10,7 @@ interface Props {
   ogImageAlt?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   ogImageAlt,
   jsonLd,
   bodyClass = "bg-cream font-sans antialiased text-navy pb-20 md:pb-0",
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = "https://porva.nl";
@@ -39,6 +41,7 @@ const absoluteOgImage = ogImage.startsWith("http")
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Favicons -->
